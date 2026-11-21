@@ -4,19 +4,18 @@ loginForm.addEventListener('submit', event => {
   event.preventDefault();
 
   const form = event.currentTarget;
-  const email = form.elements.email.value.trim();
-  const password = form.elements.password.value.trim();
+  const formData = new FormData(form);
+  const userData = {};
 
-  if (email === '' || password === '') {
+  for (const [key, value] of formData.entries()) {
+    userData[key] = value.trim();
+  }
+
+  if (Object.values(userData).some(value => value === '')) {
     alert('All form fields must be filled in');
     return;
   }
 
-  const formData = {
-    email,
-    password,
-  };
-
-  console.log(formData);
+  console.log(userData);
   form.reset();
 });
